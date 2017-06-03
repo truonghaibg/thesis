@@ -1,0 +1,81 @@
+cd C:\liblinear-2.11\windows
+
+=========Not merged
+train -v 10 unigram_count.libsvm 	69.41%
+train -v 10 bigram_count.libsvm 	66.96%
+train -v 10 trigram_count.libsvm 	67.65%
+
+train -v 10 unigram_binary.libsvm 	69.57%
+train -v 10 bigram_binary.libsvm  	67.19%
+train -v 10 trigram_binary.libsvm 	67.76%
+
+train -v 10 unigram_tfidf.libsvm  	70.05%
+train -v 10 bigram_tfidf.libsvm 	69.78%
+train -v 10 trigram_tfidf.libsvm:  	70.01%
+
+
+=========Merged
+train -v 10 unigram_count.libsvm	90.89%
+train -v 10 bigram_count.libsvm		91.32%
+train -v 10 trigram_count.libsvm	91.85%
+
+train -v 10 unigram_binary.libsvm	93.87%
+train -v 10 bigram_binary.libsvm	93.08%
+train -v 10 trigram_binary.libsvm	92.38%
+
+train -v 10 unigram_tfidf.libsvm 	77.83%
+train -v 10 bigram_tfidf.libsvm		76.42%
+train -v 10 trigram_tfidf.libsvm	75.99%
+
+
+=========10k
+train -v 10 unigram_count.libsvm	61.57%
+train -v 10 bigram_count.libsvm		61.66%
+train -v 10 trigram_count.libsvm	62.00%
+
+train -v 10 unigram_binary.libsvm	62.53%
+train -v 10 bigram_binary.libsvm	61.96%
+train -v 10 trigram_binary.libsvm	62.16%
+
+train -v 10 unigram_tfidf.libsvm 	64.1%
+train -v 10 bigram_tfidf.libsvm		64.15%
+train -v 10 trigram_tfidf.libsvm	64.45%
+
+=========50k
+train -v 10 unigram_count.libsvm	65.99%
+train -v 10 bigram_count.libsvm		64.77%
+train -v 10 trigram_count.libsvm	65.19%
+
+train -v 10 unigram_binary.libsvm	66.08%
+train -v 10 bigram_binary.libsvm	64.77%
+train -v 10 trigram_binary.libsvm	65.21%
+
+train -v 10 unigram_tfidf.libsvm 	67.11%
+train -v 10 bigram_tfidf.libsvm		67.35%
+train -v 10 trigram_tfidf.libsvm	67.45%
+
+=========100k
+train -v 10 unigram_count.libsvm	67.68%
+train -v 10 bigram_count.libsvm		65.90%
+train -v 10 trigram_count.libsvm	66.43%
+
+train -v 10 unigram_binary.libsvm	67.97%
+train -v 10 bigram_binary.libsvm	66.10%
+train -v 10 trigram_binary.libsvm	66.64%
+
+train -v 10 unigram_tfidf.libsvm 	68.68%
+train -v 10 bigram_tfidf.libsvm		68.39%
+train -v 10 trigram_tfidf.libsvm	68.72%
+
+=========150k
+train -v 10 unigram_count.libsvm	68.59%
+train -v 10 bigram_count.libsvm		66.51%
+train -v 10 trigram_count.libsvm	67.13%
+
+train -v 10 unigram_binary.libsvm	68.78%
+train -v 10 bigram_binary.libsvm	66.63%
+train -v 10 trigram_binary.libsvm	67.24%
+
+train -v 10 unigram_tfidf.libsvm 	69.45%
+train -v 10 bigram_tfidf.libsvm		69.29%
+train -v 10 trigram_tfidf.libsvm	69.58%
