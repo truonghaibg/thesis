@@ -37,7 +37,7 @@ train -v 10 unigram_binary.libsvm	62.53%
 train -v 10 bigram_binary.libsvm	61.96%
 train -v 10 trigram_binary.libsvm	62.16%
 
-train -v 10 unigram_tfidf.libsvm 	64.1%
+train -v 10 unigram_tfidf.libsvm 	64.10%
 train -v 10 bigram_tfidf.libsvm		64.15%
 train -v 10 trigram_tfidf.libsvm	64.45%
 
