@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -38,7 +39,9 @@ public class ReadDataKddCupFile {
 		Set<String> attack = new HashSet<String>();
 		BufferedReader buffReader = null;
 		try {
-			buffReader = new BufferedReader(new InputStreamReader(new FileInputStream(new File(nameFile)), GeneralConstant.ENCODING_UTF8));
+			buffReader = new BufferedReader(new InputStreamReader(
+					new FileInputStream(new File(nameFile)),
+					GeneralConstant.ENCODING_UTF8));
 			String token;
 			while ((token = buffReader.readLine()) != null) {
 				String[] parameters = token.split(",");
@@ -105,47 +108,60 @@ public class ReadDataKddCupFile {
 		// for (String ob : attack) {
 		// System.out.println(ob);
 		// }
-		System.out.println("Min: " + threshold.getCountMin() + ", Max: " + threshold.getCountMax());
-		System.out.println("Min: " + threshold.getSrvSerrorRateMin() + ", Max: " + threshold.getSrvSerrorRateMax());
-		System.out.println("Min: " + threshold.getSrvRerrorRateMin() + ", Max: " + threshold.getSrvRerrorRateMax());
-		System.out.println("Min: " + threshold.getDstHostCountMin() + ", Max: " + threshold.getDstHostCountMax());
-		System.out.println("Min: " + threshold.getDstHostSameSrvRateMin() + ", Max: " + threshold.getDstHostSameSrvRateMax());
-		System.out.println("Min: " + threshold.getDstHostDiffSrvRateMin() + ", Max: " + threshold.getDstHostDiffSrvRateMax());
+		System.out.println("Min: " + threshold.getCountMin() + ", Max: "
+				+ threshold.getCountMax());
+		System.out.println("Min: " + threshold.getSrvSerrorRateMin()
+				+ ", Max: " + threshold.getSrvSerrorRateMax());
+		System.out.println("Min: " + threshold.getSrvRerrorRateMin()
+				+ ", Max: " + threshold.getSrvRerrorRateMax());
+		System.out.println("Min: " + threshold.getDstHostCountMin() + ", Max: "
+				+ threshold.getDstHostCountMax());
+		System.out.println("Min: " + threshold.getDstHostSameSrvRateMin()
+				+ ", Max: " + threshold.getDstHostSameSrvRateMax());
+		System.out.println("Min: " + threshold.getDstHostDiffSrvRateMin()
+				+ ", Max: " + threshold.getDstHostDiffSrvRateMax());
 
 		for (ShortKddCupObject ob : shortKddCups) {
 			KddCupObject temp = new KddCupObject();
 			temp.setX3(Integer.parseInt(ob.getService()));
-			temp.setX23(KddCupUtils.getInstance().fetchUniNumber(threshold.getCountMin(), threshold.getCountMax(), GeneralConstant.NUMBER_OF_RANGES,
-					ob.getCount()));
-			temp.setX29(KddCupUtils.getInstance().fetchUniNumber(threshold.getSrvSerrorRateMin(), threshold.getSrvSerrorRateMax(),
+			temp.setX23(KddCupUtils.getInstance().fetchUniNumber(
+					threshold.getCountMin(), threshold.getCountMax(),
+					GeneralConstant.NUMBER_OF_RANGES, ob.getCount()));
+			temp.setX29(KddCupUtils.getInstance().fetchUniNumber(
+					threshold.getSrvSerrorRateMin(),
+					threshold.getSrvSerrorRateMax(),
 					GeneralConstant.NUMBER_OF_RANGES, ob.getSrvSerrorRate()));
-			temp.setX30(KddCupUtils.getInstance().fetchUniNumber(threshold.getSrvRerrorRateMin(), threshold.getSrvRerrorRateMax(),
+			temp.setX30(KddCupUtils.getInstance().fetchUniNumber(
+					threshold.getSrvRerrorRateMin(),
+					threshold.getSrvRerrorRateMax(),
 					GeneralConstant.NUMBER_OF_RANGES, ob.getSrvRerrorRate()));
-			temp.setX32(KddCupUtils.getInstance().fetchUniNumber(threshold.getDstHostCountMin(), threshold.getDstHostCountMax(),
+			temp.setX32(KddCupUtils.getInstance().fetchUniNumber(
+					threshold.getDstHostCountMin(),
+					threshold.getDstHostCountMax(),
 					GeneralConstant.NUMBER_OF_RANGES, ob.getDstHostCount()));
-			temp.setX34(KddCupUtils.getInstance().fetchUniNumber(threshold.getDstHostSameSrvRateMin(), threshold.getDstHostSameSrvRateMax(),
-					GeneralConstant.NUMBER_OF_RANGES, ob.getDstHostSameSrvRate()));
-			temp.setX35(KddCupUtils.getInstance().fetchUniNumber(threshold.getDstHostDiffSrvRateMin(), threshold.getDstHostDiffSrvRateMax(),
-					GeneralConstant.NUMBER_OF_RANGES, ob.getDstHostDiffSrvRate()));
+			temp.setX34(KddCupUtils.getInstance().fetchUniNumber(
+					threshold.getDstHostSameSrvRateMin(),
+					threshold.getDstHostSameSrvRateMax(),
+					GeneralConstant.NUMBER_OF_RANGES,
+					ob.getDstHostSameSrvRate()));
+			temp.setX35(KddCupUtils.getInstance().fetchUniNumber(
+					threshold.getDstHostDiffSrvRateMin(),
+					threshold.getDstHostDiffSrvRateMax(),
+					GeneralConstant.NUMBER_OF_RANGES,
+					ob.getDstHostDiffSrvRate()));
 			temp.setX42(Integer.parseInt(ob.getAttack()));
 			kddCups.add(temp);
 		}
-		Set<String> rules = new TreeSet<String>();
 		Map<String, Integer> ruleMap = new HashMap<String, Integer>();
 		Map<String, Integer> ruleIfMap = new HashMap<String, Integer>();
 		Map<String, Integer> ruleThenMap = new HashMap<String, Integer>();
 		FileWriter writer = null;
-		int aa = 0;
 		try {
-			writer = new FileWriter(GeneralConstant.INPUT_KDD_CUP_10_PERCENT_8_PARAMESTER);
+			writer = new FileWriter(
+					GeneralConstant.INPUT_KDD_CUP_10_PERCENT_8_PARAMESTER);
 			for (KddCupObject ob : kddCups) {
-				if (ob.getX42() == 1) {
-					aa++;
-				}
 				String key = ob.toRule();
-				rules.add(key);
-				String keyFake = ob.toRuleFake();
-				KddCupUtils.getInstance().putKeyIntoMap(ruleMap, keyFake);
+				KddCupUtils.getInstance().putKeyIntoMap(ruleMap, key);
 
 				String keyIf = ob.toRuleIf();
 				KddCupUtils.getInstance().putKeyIntoMap(ruleIfMap, keyIf);
@@ -162,13 +178,13 @@ public class ReadDataKddCupFile {
 				writer.close();
 			}
 		}
-		System.out.println("Size rule: " + rules.size());
-		System.out.println("Size aa: " + aa);
+		System.out.println("Size rule: " + ruleMap.size());
 		try {
-			writer = new FileWriter(GeneralConstant.INPUT_KDD_CUP_10_PERCENT_RULE);
-			for (String rule : rules) {
-				// System.out.println(rule);
-				writer.write(rule + "\n");
+			writer = new FileWriter(
+					GeneralConstant.INPUT_KDD_CUP_10_PERCENT_RULE);
+			for (Entry<String, Integer> entry : ruleMap.entrySet()) {
+				// System.out.println(entry.getKey());
+				writer.write(entry.getKey() + "\n");
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -177,19 +193,15 @@ public class ReadDataKddCupFile {
 				writer.close();
 			}
 		}
-		System.out.println("Size rule: " + rules.size());
 
 		List<ScoreObject> result = new ArrayList<ScoreObject>();
 		int size = kddCups.size();
 		for (Entry<String, Integer> entry : ruleMap.entrySet()) {
 			ScoreObject so = new ScoreObject();
 			String key = entry.getKey();
-			String keyIf = key.split(GeneralConstant.SYMBOL.AND)[0];
-			String keyThen = key.split(GeneralConstant.SYMBOL.AND)[1];
+			String keyIf = key.split(GeneralConstant.SYMBOL.SPACE)[0];
+			String keyThen = key.split(GeneralConstant.SYMBOL.SPACE)[1];
 			Integer value = entry.getValue();
-			if (value > 50000) {
-				System.out.println(value);
-			}
 			so.setRule(keyIf + " " + keyThen);
 			so.setSupport(value, size);
 			so.setAccuracy(value, ruleIfMap.get(keyIf));
@@ -199,13 +211,17 @@ public class ReadDataKddCupFile {
 		}
 		int tt = 0;
 		try {
-			writer = new FileWriter(GeneralConstant.INPUT_KDD_CUP_10_PERCENT_SCORE);
+			writer = new FileWriter(
+					GeneralConstant.INPUT_KDD_CUP_10_PERCENT_SCORE);
+			DecimalFormat df = new DecimalFormat("#.#");
+			df.setMaximumFractionDigits(6);
 			for (ScoreObject rule : result) {
 				// System.out.println(rule);
 				if (rule.getAccuracy() == 1) {
 					tt++;
 				}
-				writer.write(rule.getSupport() + " " + rule.getAccuracy() + " " + rule.getCoverage() + " " + rule.getRule() + "\n");
+				writer.write(df.format(rule.getSupport()) + " " + df.format(rule.getAccuracy()) + " "
+						+ df.format(rule.getCoverage()) + " " + rule.getRule() + "\n");
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -214,9 +230,12 @@ public class ReadDataKddCupFile {
 				writer.close();
 			}
 		}
-		System.out.println("Accurary:" + tt);
-		System.out.println("Rule map: " + KddCupUtils.getInstance().countNumber(ruleMap));
-		System.out.println("Rule If map: " + KddCupUtils.getInstance().countNumber(ruleIfMap));
-		System.out.println("Rule Then map: " + KddCupUtils.getInstance().countNumber(ruleThenMap));
+		System.out.println("Accurary = 1: " + tt);
+		System.out.println("Rule map: "
+				+ KddCupUtils.getInstance().countNumber(ruleMap));
+		// System.out.println("Rule If map: " +
+		// KddCupUtils.getInstance().countNumber(ruleIfMap));
+		// System.out.println("Rule Then map: " +
+		// KddCupUtils.getInstance().countNumber(ruleThenMap));
 	}
 }

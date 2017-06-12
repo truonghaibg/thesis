@@ -5,7 +5,7 @@ public class ScoreObject {
 	private double support;
 	private double accuracy;
 	private double coverage;
-	int scale = 4;
+	int scale = 6;
 
 	public void setSupport(Integer a, Integer b) {
 		this.support = (float) a / b;

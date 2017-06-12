@@ -81,20 +81,14 @@ public class KddCupObject extends Object {
 	}
 
 	public String toRule() {
-		String rule = "IF(x3=" + this.x3 + "; x23=" + this.x23 + "; x29=" + this.x29 + "; x30=" + this.x30 + "; x32=" + this.x32 + "; x34=" + this.x34
-				+ "; x35=" + this.x35 + ") THEN(y=" + this.x42 + ");";
-		return rule;
-	}
-
-	public String toRuleFake() {
-		String rule = "IF(x3=" + this.x3 + "; x23=" + this.x23 + "; x29=" + this.x29 + "; x30=" + this.x30 + "; x32=" + this.x32 + "; x34=" + this.x34
-				+ "; x35=" + this.x35 + ")" + GeneralConstant.SYMBOL.AND + "THEN(y=" + this.x42 + ");";
+		String rule = "IF(x3=" + this.x3 + ";x23=" + this.x23 + ";x29=" + this.x29 + ";x30=" + this.x30 + ";x32=" + this.x32 + ";x34=" + this.x34
+				+ ";x35=" + this.x35 + ") THEN(y=" + this.x42 + ");";
 		return rule;
 	}
 
 	public String toRuleIf() {
-		String rule = "IF(x3=" + this.x3 + "; x23=" + this.x23 + "; x29=" + this.x29 + "; x30=" + this.x30 + "; x32=" + this.x32 + "; x34=" + this.x34
-				+ "; x35=" + this.x35 + ")";
+		String rule = "IF(x3=" + this.x3 + ";x23=" + this.x23 + ";x29=" + this.x29 + ";x30=" + this.x30 + ";x32=" + this.x32 + ";x34=" + this.x34
+				+ ";x35=" + this.x35 + ")";
 		return rule;
 	}
 

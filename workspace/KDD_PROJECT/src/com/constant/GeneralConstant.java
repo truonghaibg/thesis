@@ -10,7 +10,7 @@ public final class GeneralConstant {
 		public static final String SPACE = " ";
 		public static final String UNDERSCORE = "_";
 		public static final String SLASH = "/";
-		public static final String AND = "&";
+		
 	}
 
 	public class CLASSIFY {
