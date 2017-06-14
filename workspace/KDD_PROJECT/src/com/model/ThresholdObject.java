@@ -3,18 +3,18 @@ package com.model;
 import com.kddcup.KddCupUtils;
 
 public class ThresholdObject {
-	double countMin;
-	double countMax;
-	double srvSerrorRateMin;
-	double srvSerrorRateMax;
-	double srvRerrorRateMin;
-	double srvRerrorRateMax;
-	double dstHostCountMin;
-	double dstHostCountMax;
-	double dstHostSameSrvRateMin;
-	double dstHostSameSrvRateMax;
-	double dstHostDiffSrvRateMin;
-	double dstHostDiffSrvRateMax;
+	double countMin = 1000;
+	double countMax = 0;
+	double srvSerrorRateMin = 1000;
+	double srvSerrorRateMax = 0;
+	double srvRerrorRateMin = 1000;
+	double srvRerrorRateMax = 0;
+	double dstHostCountMin = 1000;
+	double dstHostCountMax = 0;
+	double dstHostSameSrvRateMin = 1000;
+	double dstHostSameSrvRateMax = 0;
+	double dstHostDiffSrvRateMin = 1000;
+	double dstHostDiffSrvRateMax = 0;
 
 	public void setCount(double value) {
 		countMin = KddCupUtils.getInstance().searchMin(countMin, value);

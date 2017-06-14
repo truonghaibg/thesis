@@ -7,21 +7,24 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.TreeSet;
 
 import com.constant.GeneralConstant;
 import com.model.KddCupObject;
 import com.model.ScoreObject;
 import com.model.ShortKddCupObject;
 import com.model.ThresholdObject;
+import com.model.ThresholdScoreObject;
 
 public class ReadDataKddCupFile {
 
@@ -210,6 +213,8 @@ public class ReadDataKddCupFile {
 			result.add(so);
 		}
 		int tt = 0;
+		Collections.sort(result);
+		ThresholdScoreObject thresholdScore = new ThresholdScoreObject();
 		try {
 			writer = new FileWriter(
 					GeneralConstant.INPUT_KDD_CUP_10_PERCENT_SCORE);
@@ -217,10 +222,13 @@ public class ReadDataKddCupFile {
 			df.setMaximumFractionDigits(6);
 			for (ScoreObject rule : result) {
 				// System.out.println(rule);
+				thresholdScore.setSupport(rule.getSupport());
+				thresholdScore.setAccuracy(rule.getAccuracy());
+				thresholdScore.setCoverage(rule.getCoverage());
 				if (rule.getAccuracy() == 1) {
 					tt++;
 				}
-				writer.write(df.format(rule.getSupport()) + " " + df.format(rule.getAccuracy()) + " "
+				writer.write(df.format(rule.getTotal()) + " " + df.format(rule.getSupport()) + " " + df.format(rule.getAccuracy()) + " "
 						+ df.format(rule.getCoverage()) + " " + rule.getRule() + "\n");
 			}
 		} catch (IOException e) {
@@ -230,6 +238,7 @@ public class ReadDataKddCupFile {
 				writer.close();
 			}
 		}
+		thresholdScore.showReport();
 		System.out.println("Accurary = 1: " + tt);
 		System.out.println("Rule map: "
 				+ KddCupUtils.getInstance().countNumber(ruleMap));

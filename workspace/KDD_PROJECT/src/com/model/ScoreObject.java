@@ -1,25 +1,29 @@
 package com.model;
 
-public class ScoreObject {
+public class ScoreObject implements Comparable<ScoreObject>{
 	private String rule;
 	private double support;
 	private double accuracy;
 	private double coverage;
+	private double total;
 	int scale = 6;
 
 	public void setSupport(Integer a, Integer b) {
-		this.support = (float) a / b;
+		this.support = (double) a / b;
 		this.support = round(this.support, scale);
+		this.total = this.total + this.support;
 	}
 
 	public void setAccuracy(Integer a, Integer b) {
-		this.accuracy = (float) a / b;
+		this.accuracy = (double) a / b;
 		this.accuracy = round(this.accuracy, scale);
+		this.total = this.total + this.accuracy;
 	}
 
 	public void setCoverage(Integer a, Integer b) {
-		this.coverage = (float) a / b;
+		this.coverage = (double) a / b;
 		this.coverage = round(this.coverage, scale);
+		this.total = this.total + this.coverage;
 	}
 
 	public String getRule() {
@@ -54,6 +58,14 @@ public class ScoreObject {
 		this.coverage = coverage;
 	}
 
+	public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
+	}
+
 	public static double round(double value, int places) {
 		if (places < 0)
 			throw new IllegalArgumentException();
@@ -62,5 +74,13 @@ public class ScoreObject {
 		value = value * factor;
 		long tmp = Math.round(value);
 		return (double) tmp / factor;
+	}
+
+	public int compareTo(ScoreObject o) {
+		return new Double(o.getTotal()).compareTo(this.total);
+	}
+
+	public String toString() {
+		return String.valueOf(this.total);
 	}
 }
