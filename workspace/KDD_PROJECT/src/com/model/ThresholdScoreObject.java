@@ -2,6 +2,7 @@ package com.model;
 
 import com.kddcup.KddCupUtils;
 
+
 public class ThresholdScoreObject {
 	private double supportMin = 1000;
 	private double supportMax = 0;

@@ -1,7 +1,5 @@
 package com.model;
 
-import com.constant.GeneralConstant;
-
 public class KddCupObject extends Object {
 	private int x3;
 	private int x23;
