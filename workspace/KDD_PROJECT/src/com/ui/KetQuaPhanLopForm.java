@@ -5,10 +5,7 @@
  */
 package com.ui;
 
-/**
- *
- * @author Manh Son
- */
+
 public class KetQuaPhanLopForm extends javax.swing.JFrame {
 
     /**
@@ -34,7 +31,7 @@ public class KetQuaPhanLopForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("TRÍCH CHỌN ĐẶC TRƯNG");
+        jLabel1.setText("TRÃ�CH CHá»ŒN Ä�áº¶C TRÆ¯NG");
 
         jTable1.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -42,7 +39,7 @@ public class KetQuaPhanLopForm extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Thuộc tính 3", "Thuộc tính 23", "Thuộc tính 29", "Thuộc tính 30", "Thuộc tính 34", "Thuộc tính 35", "Độ mạnh", "Độ chính xác", "Độ bao phủ"
+                "Thuá»™c tÃ­nh 3", "Thuá»™c tÃ­nh 23", "Thuá»™c tÃ­nh 29", "Thuá»™c tÃ­nh 30", "Thuá»™c tÃ­nh 34", "Thuá»™c tÃ­nh 35", "Ä�á»™ máº¡nh", "Ä�á»™ chÃ­nh xÃ¡c", "Ä�á»™ bao phá»§"
             }
         ) {
             Class[] types = new Class [] {
