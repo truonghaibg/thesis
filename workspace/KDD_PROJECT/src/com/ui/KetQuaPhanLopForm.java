@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 package com.ui;
+import javax.swing.JLabel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import java.awt.Font;
 
 
 public class KetQuaPhanLopForm extends javax.swing.JFrame {
@@ -26,31 +30,55 @@ public class KetQuaPhanLopForm extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        table = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("TRÃ�CH CHá»ŒN Ä�áº¶C TRÆ¯NG");
+        jLabel1.setText("KẾT QUẢ PHÂN LOẠI");
 
-        jTable1.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        table.setFont(new Font("Times New Roman", Font.PLAIN, 15)); // NOI18N
+        table.setModel(new DefaultTableModel(
+        	new Object[][] {
+        			
+        			{"1", "0.107753 ", "1", "0.135984", "IF(x3=9;x23=4;x29=0;x30=0;x32=0;x34=0;x35=0) THEN(y=1); "},
+        			{"2", "0.091026 ", "1 ", "0.114876", "IF(x3=11;x23=1;x29=0;x30=0;x32=0;x34=0;x35=0) THEN(y=1);"},
+        			{"3", "0.014018 ", "1", "0.067519", "IF(x3=11;x23=0;x29=0;x30=0;x32=0;x34=4;x35=0) THEN(y=0);"},
+        			{"4", "0.004901 ", "1 ", "0.023605", "IF(x3=10;x23=0;x29=0;x30=0;x32=0;x34=0;x35=4) THEN(y=0);"},
+        			{"5", "0.460138 ", "0.999248", "0.580696", "IF(x3=9;x23=0;x29=0;x30=0;x32=0;x34=0;x35=0) THEN(y=1); "},
+        			{"6", "0.087452 ", "0.962183", "0.421234", "IF(x3=0;x23=0;x29=0;x30=0;x32=0;x34=0;x35=0) THEN(y=0); "},
+        			{"7", "0.101457 ", "0.999781", "0.128039", "IF(x3=11;x23=2;x29=0;x30=0;x32=0;x34=0;x35=0) THEN(y=1);"},
+        			{"8", "0.015149 ", "0.974479", "0.07297 ", "IF(x3=0;x23=0;x29=0;x30=0;x32=1;x34=0;x35=0) THEN(y=0); "},
+        			{"9", "0.008271 ", "0.975645", "0.039839", "IF(x3=0;x23=0;x29=0;x30=0;x32=2;x34=0;x35=0) THEN(y=0); "},
+        			{"10","0.004012 ", "0.998992", "0.019325", "IF(x3=0;x23=0;x29=0;x30=0;x32=0;x34=4;x35=0) THEN(y=0); "},
 
-            },
-            new String [] {
-                "Thuá»™c tÃ­nh 3", "Thuá»™c tÃ­nh 23", "Thuá»™c tÃ­nh 29", "Thuá»™c tÃ­nh 30", "Thuá»™c tÃ­nh 34", "Thuá»™c tÃ­nh 35", "Ä�á»™ máº¡nh", "Ä�á»™ chÃ­nh xÃ¡c", "Ä�á»™ bao phá»§"
-            }
+        	},
+        	new String[] {
+        		"S\u1ED1 t\u1EE9 t\u1EF1", "\u0110\u1ED9 h\u1ED7 tr\u1EE3", "\u0110\u1ED9 ch\u00EDnh x\u00E1c", "\u0110\u1ED9 b\u1EA3o ph\u1EE7", "Lu\u1EADt"
+        	}
         ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
+        	Class[] columnTypes = new Class[] {
+        		Object.class, String.class, Object.class, Object.class, Object.class
+        	};
+        	public Class getColumnClass(int columnIndex) {
+        		return columnTypes[columnIndex];
+        	}
         });
-        jScrollPane2.setViewportView(jTable1);
+        table.getColumnModel().getColumn(0).setPreferredWidth(80);
+        table.getColumnModel().getColumn(1).setPreferredWidth(80);
+        table.getColumnModel().getColumn(2).setPreferredWidth(80);
+        table.getColumnModel().getColumn(3).setPreferredWidth(80);
+        table.getColumnModel().getColumn(4).setPreferredWidth(400);
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+		table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+		table.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+		table.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+		table.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
+		for (int i=0 ; i<10 ; i++) {
+			table.setRowHeight(i, 25);
+		}
+        jScrollPane2.setViewportView(table);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,6 +145,6 @@ public class KetQuaPhanLopForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

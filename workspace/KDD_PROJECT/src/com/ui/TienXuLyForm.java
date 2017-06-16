@@ -4,6 +4,17 @@
  * and open the template in the editor.
  */
 package com.ui;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.LayoutStyle.ComponentPlacement;
+
+import java.awt.Dimension;
+import java.awt.Font;
 
 /**
  *
@@ -15,6 +26,9 @@ public class TienXuLyForm extends javax.swing.JFrame {
      * Creates new form TienXuLyForm
      */
     public TienXuLyForm() {
+    	getContentPane().setFont(new Font("Times New Roman", Font.PLAIN, 12));
+    	setResizable(false);
+    	setTitle("Form tiền xử lý dữ liệu");
         initComponents();
     }
 
@@ -28,54 +42,90 @@ public class TienXuLyForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        table = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-
+        
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Service", "Count", "Srv_serror_rate", "Srv_rerror_rate", "Dst_host_count", "Dst_host_same_srv_rate", "Dst_host_diff_srv_rate", "Attack"
-            }
+        table.setFont(new Font("Times New Roman", Font.PLAIN, 14)); // NOI18N
+        table.setModel(new DefaultTableModel(
+        	new Object[][] {
+        		{new Integer(0), new Integer(0), new Integer(0), new Integer(0), new Integer(1), new Integer(0), new Integer(0), new Integer(0)},
+        		{new Integer(11), new Integer(0), new Integer(1), new Integer(3), new Integer(0), new Integer(0), new Integer(0), new Integer(1)},
+        		{new Integer(11), new Integer(0), new Integer(2), new Integer(1), new Integer(0), new Integer(0), new Integer(0), new Integer(1)},
+        		{new Integer(11), new Integer(0), new Integer(2), new Integer(0), new Integer(0), new Integer(0), new Integer(0), new Integer(1)},
+        		{new Integer(11), new Integer(0), new Integer(0), new Integer(0), new Integer(0), new Integer(0), new Integer(0), new Integer(1)},
+        		{new Integer(11), new Integer(0), new Integer(1), new Integer(2), new Integer(0), new Integer(0), new Integer(0), new Integer(1)},
+        		{new Integer(11), new Integer(0), new Integer(1), new Integer(1), new Integer(0), new Integer(0), new Integer(0), new Integer(1)},
+        		{new Integer(11), new Integer(0), new Integer(1), new Integer(0), new Integer(0), new Integer(0), new Integer(0), new Integer(1)},
+        		{new Integer(1), new Integer(0), new Integer(0), new Integer(0), new Integer(1), new Integer(2), new Integer(0), new Integer(0)},
+        		{new Integer(1), new Integer(0), new Integer(0), new Integer(0), new Integer(2), new Integer(2), new Integer(0), new Integer(0)},
+        		{new Integer(1), new Integer(0), new Integer(0), new Integer(0), new Integer(2), new Integer(3), new Integer(0), new Integer(0)},
+        		{new Integer(1), new Integer(0), new Integer(0), new Integer(0), new Integer(3), new Integer(2), new Integer(0), new Integer(0)},
+        		{new Integer(3), new Integer(0), new Integer(0), new Integer(0), new Integer(3), new Integer(0), new Integer(0), new Integer(0)},
+        		{new Integer(13), new Integer(0), new Integer(0), new Integer(0), new Integer(3), new Integer(1), new Integer(0), new Integer(0)},
+        		{new Integer(11), new Integer(0), new Integer(1), new Integer(1), new Integer(0), new Integer(0), new Integer(0), new Integer(1)},
+        		{new Integer(11), new Integer(0), new Integer(1), new Integer(0), new Integer(0), new Integer(0), new Integer(0), new Integer(1)},
+        		{new Integer(1), new Integer(0), new Integer(0), new Integer(0), new Integer(1), new Integer(2), new Integer(0), new Integer(0)},
+        		{new Integer(1), new Integer(0), new Integer(0), new Integer(0), new Integer(2), new Integer(2), new Integer(0), new Integer(0)},
+        		{new Integer(1), new Integer(0), new Integer(0), new Integer(0), new Integer(2), new Integer(3), new Integer(0), new Integer(0)},
+        		{new Integer(1), new Integer(0), new Integer(0), new Integer(0), new Integer(3), new Integer(2), new Integer(0), new Integer(0)},
+        		{new Integer(3), new Integer(0), new Integer(0), new Integer(0), new Integer(3), new Integer(0), new Integer(0), new Integer(0)},
+        		{new Integer(13), new Integer(0), new Integer(0), new Integer(0), new Integer(3), new Integer(1), new Integer(0), new Integer(0)},
+        		{new Integer(6), new Integer(0), new Integer(0), new Integer(0), new Integer(0), new Integer(1), new Integer(0), new Integer(0)},
+        	},
+        	new String[] {
+        		"Service", "Count", "Srv_serror_rate", "Srv_rerror_rate", "Dst_host_count", "Dst_host_same_srv_rate", "Dst_host_diff_srv_rate", "Attack"
+        	}
         ));
-        jScrollPane1.setViewportView(jTable1);
+        
+        table.getColumnModel().getColumn(0).setPreferredWidth(50);
+        table.getColumnModel().getColumn(1).setPreferredWidth(50);
+        table.getColumnModel().getColumn(2).setPreferredWidth(93);
+        table.getColumnModel().getColumn(3).setPreferredWidth(88);
+        table.getColumnModel().getColumn(4).setPreferredWidth(88);
+        table.getColumnModel().getColumn(5).setPreferredWidth(150);
+        table.getColumnModel().getColumn(6).setPreferredWidth(127);
+        table.getColumnModel().getColumn(7).setPreferredWidth(46);
+        
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+		table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+		table.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+		table.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+		table.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
+		table.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
+		table.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
+		table.getColumnModel().getColumn(6).setCellRenderer(centerRenderer);
+		table.getColumnModel().getColumn(7).setCellRenderer(centerRenderer);
+        
+        jScrollPane1.setViewportView(table);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("KẾT QUẢ TIỀN XỬ LÝ FILE DỮ LIỆU");
+        jLabel2.setText("Kết quả tiền xử lý dữ liệu");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 782, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(258, 258, 258)
-                        .addComponent(jLabel2)))
-                .addContainerGap(34, Short.MAX_VALUE))
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addGap(31)
+        			.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 782, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap(34, Short.MAX_VALUE))
+        		.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+        			.addContainerGap(365, Short.MAX_VALUE)
+        			.addComponent(jLabel2)
+        			.addGap(256))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
+        	layout.createParallelGroup(Alignment.TRAILING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addGap(23)
+        			.addComponent(jLabel2)
+        			.addPreferredGap(ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+        			.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 279, GroupLayout.PREFERRED_SIZE)
+        			.addGap(29))
         );
+        getContentPane().setLayout(layout);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -118,6 +168,6 @@ public class TienXuLyForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }
