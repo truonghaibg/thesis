@@ -228,10 +228,10 @@ public class ReadDataKddCupFile {
 	public static void readU2R(String nameFile) throws IOException {
 		List<ShortU2RObject> shortU2R = new ArrayList<ShortU2RObject>();
 		List<U2RObject> u2rCups = new ArrayList<U2RObject>();
-		List<String> services = new ArrayList<String>();
 		ThresholdU2RObject threshold = new ThresholdU2RObject();
 		Set<String> attack = new HashSet<String>();
 		BufferedReader buffReader = null;
+//		int count = 0;
 		try {
 			buffReader = new BufferedReader(new InputStreamReader(new FileInputStream(new File(nameFile)), GeneralConstant.ENCODING_UTF8));
 			String token;
@@ -305,14 +305,15 @@ public class ReadDataKddCupFile {
 					threshold.setX41(x41);
 					shortU2RKddCup.setX41(x41);
 
-					String label = parameters[41].replace(".", "");
-					attack.add(label);
-					if (GeneralConstant.U2R_LABELS.contains(label)) {
-						label = "1";
+					String x42 = parameters[41].replace(".", "");
+					attack.add(x42);
+					if (GeneralConstant.U2R_LABELS.contains(x42)) {
+						x42 = "1";
+//						count ++;
 					} else {
-						label = "0";
+						x42 = "0";
 					}
-					shortU2RKddCup.setX42(label);
+					shortU2RKddCup.setX42(x42);
 					shortU2R.add(shortU2RKddCup);
 				}
 			}
@@ -325,6 +326,7 @@ public class ReadDataKddCupFile {
 				buffReader.close();
 			}
 		}
+//		System.out.println("Count: " + count);
 		// for (String ob : attack) {
 		// System.out.println(ob);
 		// }
@@ -346,6 +348,7 @@ public class ReadDataKddCupFile {
 			U2RObject temp = new U2RObject();
 			temp.setX6(KddCupUtils.getInstance().fetchUniNumber(threshold.getX6Min(), threshold.getX6Max(), GeneralConstant.NUMBER_OF_RANGES, ob.getX6()));
 			temp.setX11(KddCupUtils.getInstance().fetchUniNumber(threshold.getX11Min(), threshold.getX11Max(), GeneralConstant.NUMBER_OF_RANGES, ob.getX11()));
+			temp.setX12(KddCupUtils.getInstance().fetchUniNumber(threshold.getX12Min(), threshold.getX12Max(), GeneralConstant.NUMBER_OF_RANGES, ob.getX12()));
 			temp.setX14(KddCupUtils.getInstance().fetchUniNumber(threshold.getX14Min(), threshold.getX14Max(), GeneralConstant.NUMBER_OF_RANGES, ob.getX14()));
 			temp.setX17(KddCupUtils.getInstance().fetchUniNumber(threshold.getX17Min(), threshold.getX17Max(), GeneralConstant.NUMBER_OF_RANGES, ob.getX17()));
 			temp.setX24(KddCupUtils.getInstance().fetchUniNumber(threshold.getX24Min(), threshold.getX24Max(), GeneralConstant.NUMBER_OF_RANGES, ob.getX24()));

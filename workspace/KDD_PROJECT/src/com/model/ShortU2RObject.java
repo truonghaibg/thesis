@@ -16,7 +16,6 @@ public class ShortU2RObject {
 	private double x41;
 	private String x42;
 
-	
 	public double getX6() {
 		return x6;
 	}
@@ -139,7 +138,11 @@ public class ShortU2RObject {
 		// "," + this.srvRerrorRate + "," + this.dstHostCount + "," +
 		// this.dstHostSameSrvRate
 		// + "," + this.dstHostDiffSrvRate + "," + this.attack;
-		return (int) this.x6 + " " + (int) this.x6 + " " + (int) this.x6 + " " + (int) this.x6 + " " + (int) this.x6 + " "
-				+ (int) this.x6 + " " + (int) this.x6 + " " + this.x42;
+		return (int) this.x6 + " " + (int) this.x11 + " " + (int) this.x12
+				+ " " + (int) this.x14 + " " + (int) this.x6 + " "
+				+ (int) this.x17 + " " + (int) this.x24 + " " + (int) this.x32
+				+ " " + (int) this.x33 + " " + (int) this.x35 + " "
+				+ (int) this.x36 + " " + (int) this.x37 + " " + (int) this.x40
+				+ " " + (int) this.x41 + " " + this.x42;
 	}
 }
