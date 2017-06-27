@@ -1,6 +1,6 @@
 package com.model;
 
-public class ShortKddCupObject {
+public class ShortDOSObject {
 	private String service;
 	private double count;
 	private double srvSerrorRate;
@@ -10,7 +10,7 @@ public class ShortKddCupObject {
 	private double dstHostDiffSrvRate;
 	private String attack;
 
-	public ShortKddCupObject() {
+	public ShortDOSObject() {
 
 	}
 

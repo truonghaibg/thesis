@@ -1,6 +1,6 @@
 package com.model;
 
-public class KddCupObject extends Object {
+public class DosObject extends Object {
 	private int x3;
 	private int x23;
 	private int x29;
@@ -95,7 +95,7 @@ public class KddCupObject extends Object {
 		return rule;
 	}
 
-	public int compareTo(KddCupObject object) {
+	public int compareTo(DosObject object) {
 
 		int compareQuantity = object.getX3();
 

@@ -7,8 +7,8 @@ package com.ui;
 
 import com.constant.GeneralConstant;
 import com.kddcup.KddCupUtils;
-import com.model.KddCupObject;
-import com.model.ShortKddCupObject;
+import com.model.DosObject;
+import com.model.ShortDOSObject;
 import com.model.ThresholdObject;
 import java.io.BufferedReader;
 import java.io.File;
@@ -184,8 +184,8 @@ public class MainForm extends JFrame {
             return;
         }
         
-        List<ShortKddCupObject> shortKddCups = new ArrayList<ShortKddCupObject>();
-        List<KddCupObject> kddCups = new ArrayList<KddCupObject>();
+        List<ShortDOSObject> shortKddCups = new ArrayList<ShortDOSObject>();
+        List<DosObject> kddCups = new ArrayList<DosObject>();
         List<String> services = new ArrayList<String>();
         ThresholdObject threshold = new ThresholdObject();
         Set<String> attack = new HashSet<String>();
@@ -198,7 +198,7 @@ public class MainForm extends JFrame {
             while ((token = buffReader.readLine()) != null) {
                 String[] parameters = token.split(",");
                 if (parameters.length == 42) {
-                    ShortKddCupObject shortKddCup = new ShortKddCupObject();
+                    ShortDOSObject shortKddCup = new ShortDOSObject();
                     float count;
                     float srvSerrorRate;
                     float srvRerrorRate;
@@ -239,7 +239,7 @@ public class MainForm extends JFrame {
 
                     String label = parameters[41].replace(".", "");
                     attack.add(label);
-                    if (GeneralConstant.LABELS.contains(label)) {
+                    if (GeneralConstant.DOS_LABELS.contains(label)) {
                         label = "1";
                     } else {
                         label = "0";
@@ -277,8 +277,8 @@ public class MainForm extends JFrame {
         System.out.println("Min: " + threshold.getDstHostDiffSrvRateMin()
                 + ", Max: " + threshold.getDstHostDiffSrvRateMax());
 
-        for (ShortKddCupObject ob : shortKddCups) {
-            KddCupObject temp = new KddCupObject();
+        for (ShortDOSObject ob : shortKddCups) {
+            DosObject temp = new DosObject();
             temp.setX3(Integer.parseInt(ob.getService()));
             temp.setX23(KddCupUtils.getInstance().fetchUniNumber(
                     threshold.getCountMin(), threshold.getCountMax(),
@@ -311,8 +311,8 @@ public class MainForm extends JFrame {
         FileWriter writer = null;
         try {
             writer = new FileWriter(
-                    GeneralConstant.INPUT_KDD_CUP_10_PERCENT_8_PARAMESTER);
-            for (KddCupObject ob : kddCups) {
+                    GeneralConstant.INPUT_KDD_CUP_10_PERCENT_8_PARAMESTER_DOS);
+            for (DosObject ob : kddCups) {
                 writer.write(ob.toString() + "\n");
             }
         } catch (IOException e) {
