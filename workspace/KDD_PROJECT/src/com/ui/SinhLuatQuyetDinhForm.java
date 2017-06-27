@@ -4,6 +4,13 @@
  * and open the template in the editor.
  */
 package com.ui;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import java.awt.Font;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.JLabel;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -15,6 +22,7 @@ public class SinhLuatQuyetDinhForm extends javax.swing.JFrame {
      * Creates new form TrichChon
      */
     public SinhLuatQuyetDinhForm() {
+    	setTitle("Form sinh luật quyết định");
         initComponents();
     }
 
@@ -29,55 +37,84 @@ public class SinhLuatQuyetDinhForm extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        table = new javax.swing.JTable();
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel1.setText("SINH LUẬT QUYẾT ĐỊNH");
 
-        jTable1.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Số thứ tự", "Danh sách luật"
-            }
+        table.setFont(new Font("Times New Roman", Font.PLAIN, 15)); // NOI18N
+        table.setModel(new DefaultTableModel(
+        	new Object[][] {
+        		{new Integer(1), "IF(x3=1;x23=0;x29=0;x30=0;x32=0;x34=3;x35=0) THEN(y=0);"},
+        		{new Integer(2), "IF(x3=11;x23=0;x29=0;x30=0;x32=0;x34=0;x35=0) THEN(y=0);"},
+        		{new Integer(3), "IF(x3=11;x23=0;x29=0;x30=0;x32=0;x34=0;x35=1) THEN(y=0);"},
+        		{new Integer(4), "IF(x3=59;x23=0;x29=0;x30=0;x32=3;x34=0;x35=0) THEN(y=0);"},
+        		{new Integer(5), "IF(x3=11;x23=0;x29=0;x30=0;x32=0;x34=3;x35=2) THEN(y=1);"},
+        		{new Integer(6), "IF(x3=1;x23=0;x29=0;x30=0;x32=0;x34=3;x35=2) THEN(y=0);"},
+        		{new Integer(7), "IF(x3=54;x23=2;x29=0;x30=0;x32=0;x34=0;x35=0) THEN(y=1);"},
+        		{new Integer(8), "IF(x3=11;x23=0;x29=0;x30=0;x32=0;x34=0;x35=2) THEN(y=0);"},
+        		{new Integer(9), "IF(x3=0;x23=2;x29=0;x30=0;x32=0;x34=0;x35=0) THEN(y=1);"},
+        		{new Integer(10), "IF(x3=0;x23=0;x29=0;x30=0;x32=3;x34=3;x35=0) THEN(y=0);"},
+        		{new Integer(11), "IF(x3=10;x23=0;x29=0;x30=0;x32=3;x34=0;x35=0) THEN(y=0);"},
+        		{new Integer(12), "IF(x3=1;x23=0;x29=0;x30=0;x32=0;x34=3;x35=3) THEN(y=0);"},
+        		{new Integer(13), "IF(x3=11;x23=0;x29=0;x30=0;x32=0;x34=3;x35=1) THEN(y=1);"},
+        		{new Integer(14), "IF(x3=61;x23=0;x29=2;x30=3;x32=0;x34=0;x35=0) THEN(y=0);"},
+        		{new Integer(15), "IF(x3=42;x23=1;x29=0;x30=2;x32=0;x34=0;x35=1) THEN(y=0);"},
+        	},
+        	new String[] {
+        		"S\u1ED1 th\u1EE9 t\u1EF1", "Lu\u1EADt quy\u1EBFt \u0111\u1ECBnh"
+        	}
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
+        	Class[] columnTypes = new Class[] {
+        		Integer.class, String.class
+        	};
+        	public Class getColumnClass(int columnIndex) {
+        		return columnTypes[columnIndex];
+        	}
+        	boolean[] columnEditables = new boolean[] {
+        		false, true
+        	};
+        	public boolean isCellEditable(int row, int column) {
+        		return columnEditables[column];
+        	}
         });
-        jScrollPane2.setViewportView(jTable1);
+        for (int i=0 ; i<14 ; i++) {
+			table.setRowHeight(i, 25);
+		}
+        table.getColumnModel().getColumn(0).setPreferredWidth(100);
+        table.getColumnModel().getColumn(1).setPreferredWidth(800);
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+		table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+//		table.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+        jScrollPane2.setViewportView(table);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 722, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(310, 310, 310)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(64, Short.MAX_VALUE))
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(layout.createSequentialGroup()
+        					.addGap(310)
+        					.addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 230, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(layout.createSequentialGroup()
+        					.addGap(67)
+        					.addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, 722, GroupLayout.PREFERRED_SIZE)))
+        			.addContainerGap(64, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addComponent(jLabel1)
+        			.addGap(18)
+        			.addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, 414, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap(41, Short.MAX_VALUE))
         );
+        getContentPane().setLayout(layout);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -127,6 +164,6 @@ public class SinhLuatQuyetDinhForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }
