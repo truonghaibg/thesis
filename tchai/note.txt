@@ -1,0 +1,109 @@
+Trigram Size: 94628
+Count male: 4959
+Count female: 5041
+
+
+10.000 records
+Liblinear 2 seconds
+62.16%
+
+10.000 records
+Libsvm 3 minutes 10 seconds
+50.41%
+
+
+Tạo sao Liblinear nhanh hơn Libsvm
+Trong thực tế sự phức tạp của thuật toán SVM (kernel và linear SVM) được thực hiện trong Libsvm là O(n^2) hoặc O(n^3) trong khi đó liblinear là O(n) vì không hỗ trợ kernel. N là số lượng mẫu trong tập dữ liệu huấn luyện.
+Liblinear được tối ưu hóa để đối phó với phân loại tuyến tính  (tức là không cần đến kernal-hạt nhân), trong khi phân loại tuyến tính chỉ là một trong nhiều khả năng của libsvm, do đó hợp lý nó có thể không phù hợp với liblinear về Độ chính xác phân loại
+
+Usually, the decision is whether to use linear or an RBF (aka Gaussian) kernel. There are two main factors to consider:
+
+Solving the optimisation problem for a linear kernel is much faster, see e.g. LIBLINEAR.
+Typically, the best possible predictive performance is better for a nonlinear kernel (or at least as good as the linear one).
+It's been shown that the linear kernel is a degenerate version of RBF, hence the linear kernel is never more accurate than a properly tuned RBF kernel. Quoting the abstract from the paper I linked:
+
+    svm_type can be one of C_SVC, NU_SVC, ONE_CLASS, EPSILON_SVR, NU_SVR.
+
+    C_SVC:		C-SVM classification
+    NU_SVC:		nu-SVM classification
+    ONE_CLASS:		one-class-SVM
+    EPSILON_SVR:	epsilon-SVM regression
+    NU_SVR:		nu-SVM regression
+
+    kernel_type can be one of LINEAR, POLY, RBF, SIGMOID.
+
+    LINEAR:	u'*v
+    POLY:	(gamma*u'*v + coef0)^degree
+    RBF:	exp(-gamma*|u-v|^2)
+    SIGMOID:	tanh(gamma*u'*v + coef0)
+    PRECOMPUTED: kernel values in training_set_file
+	
+Usage: train [options] training_set_file [model_file]
+options:
+-s type : set type of solver (default 1)
+  for multi-class classification
+	 0 -- L2-regularized logistic regression (primal)
+	 1 -- L2-regularized L2-loss support vector classification (dual)
+	 2 -- L2-regularized L2-loss support vector classification (primal)
+	 3 -- L2-regularized L1-loss support vector classification (dual)
+	 4 -- support vector classification by Crammer and Singer
+	 5 -- L1-regularized L2-loss support vector classification
+	 6 -- L1-regularized logistic regression
+	 7 -- L2-regularized logistic regression (dual)
+  for regression
+	11 -- L2-regularized L2-loss support vector regression (primal)
+	12 -- L2-regularized L2-loss support vector regression (dual)
+	13 -- L2-regularized L1-loss support vector regression (dual)
+-c cost : set the parameter C (default 1)
+-p epsilon : set the epsilon in loss function of epsilon-SVR (default 0.1)
+-e epsilon : set tolerance of termination criterion
+	-s 0 and 2
+		|f'(w)|_2 <= eps*min(pos,neg)/l*|f'(w0)|_2,
+		where f is the primal function and pos/neg are # of
+		positive/negative data (default 0.01)
+	-s 11
+		|f'(w)|_2 <= eps*|f'(w0)|_2 (default 0.001)
+	-s 1, 3, 4 and 7
+		Dual maximal violation <= eps; similar to libsvm (default 0.1)
+	-s 5 and 6
+		|f'(w)|_1 <= eps*min(pos,neg)/l*|f'(w0)|_1,
+		where f is the primal function (default 0.01)
+	-s 12 and 13\n"
+		|f'(alpha)|_1 <= eps |f'(alpha0)|,
+		where f is the dual function (default 0.1)
+-B bias : if bias >= 0, instance x becomes [x; bias]; if < 0, no bias term added (default -1)
+-wi weight: weights adjust the parameter C of different classes (see README for details)
+-v n: n-fold cross validation mode
+-C : find parameter C (only for -s 0 and 2)
+-q : quiet mode (no outputs)
+
+Option -v randomly splits the data into n parts and calculates cross
+validation accuracy on them.
+
+Option -C conducts cross validation under different C values and finds
+the best one. This options is supported only by -s 0 and -s 2. If
+the solver is not specified, -s 2 is used.
+
+Mô hình Bag of Words (BoW) là một mô hình
+được sử dụng phổ biến trong lĩnh vực phân loại
+văn bản. Mô hình này thường sử dụng để xử lý
+ngôn ngữ tự nhiên, được dùng để biểu diễn tài liệu,
+xem tài liệu là một tập hợp các từ (words) mà
+không quan tâm đến thứ tự cũng như cấu trúc cú
+pháp của chúng.
+Một văn bản được biểu diễn dạng véc-tơ (có n
+thành phần là các từ tương ứng) mà giá trị thành
+phần thứ j là tần số xuất hiện từ thứ j trong văn
+bản. Nếu xét tập D gồm m văn bản và tự điển có n
+từ vựng, thì D có thể được biểu diễn thành bảng D
+kích thước m x n, dòng thứ i của bảng là véc-tơ
+biểu diễn văn bản thứ i tương ứng.
+
+Một số thuật toán thường được lựa chọn khi xây dựng bộ phân lớp gồm có: 
+máy vector hỗ trợ (Support Vector Machine – SVM); 
+k láng giềng gần nhất (K Nearest Neighbours – KNN); 
+tiếp cận xác suất thống kê (Naïve Bayes – NB); 
+Cây quyết định (Decision Tree – DT); 
+sử dụng mạng nơron (Neural Network – Nnet); 
+dựa trên vector trọng tâm (Centroid–base vector); 
+hay tuyến tính bình phương nhỏ nhất (Linear Least Square Fit – LLSF)
