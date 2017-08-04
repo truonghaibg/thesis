@@ -11,6 +11,55 @@ Liblinear 2 seconds
 Libsvm 3 minutes 10 seconds
 50.41%
 
+==============================
+Origin Size: 12923
+Bigram Size: 370663
+Trigram Size: 1230451
+Total (male + female): 216872
+Count male: 107702
+Count female: 109170
+
+Size original: 159 MB
+Size Status: 31.1 MB
+Size User: 17.0 MB
+
+OS WINDOWN 7, Intel(R) Core(TM) i5-4590 CPU @ 3.30GHz (4CPUs), ~3.3GHz, Ram 16GB, HDD
+trigram_tfidf.libsvm: 65.3 MB
+Time: 14 minutes
+==============================
+
+Kết quả này sẽ phụ thuộc vào 3 yếu tốt
+quan trọng hàng đầu đó là:
+- Tập dữ liệu huấn luyện đủ lớn và chính xác. Trong quá trình huấn luyện, khi có
+tập dữ liệu đủ lớn và chính xác thì quá trình huấn luyện sẽ tốt, đồng nghĩa với việc sẽ
+có một mô hình phân lớp tốt phục vụ cho giai đoạn phân lớp sau này. Nếu như tập dữ
+liệu quá ít thì sẽ gây ra tình trạng có nhiều đặc trưng chưa được “học” trong quá trình
+huấn luyện. Và nếu tập dữ liệu không chính xác ngay từ đầu thì mô hình học dù có sử
+dụng đúng phương pháp thì mô hình phân lớp cũng không thể tốt, dẫn dến hệ quả là
+quá trình phân lớp sau này sẽ sai theo.
+- Quá trình xử lý dữ liệu cũng là một bước quan trọng không kém. Có thể dễ dàng
+nhận thấy một điều là các phương pháp ở trên hầu hết đều sử dụng mô hình vector để
+biểu diễn văn bản. Do đó, việc lựa chọn phương pháp tách từ sẽ ảnh hưởng rất lớn đến
+quá trình biểu diễn văn bản bằng vector. Đối với một số ngôn ngữ như tiếng Anh, việc
+tách từ sẽ dễ dàng hơn vì các từ tách biệt nhau chỉ bởi dấu cách (khoảng trắng). Tuy
+nhiên, đối với một số đa âm như tiếng Việt thì việc tách từ dựa trên khoảng trắng là
+không chính xác, hơn nữa trong tiếng Việt có rất nhiều tính từ ở dạng từ ghép, loại từ
+này chính là từ mang quan điểm nhiều nhất. Vậy nên việc lựa chọn phương pháp tách
+từ là một yếu tố quan trọng quyết định đến độ chính xác cảu tập dữ liệu huấn luyện.
+- Một thuật toán để sử dụng trong quá trình phân lớp (phân loại) sẽ là hợp lý khi
+thuật toán phân loại có thời gian xử lý hợp lý. Tức là thời gian học, thời gian phân loại
+văn bản là hợp lý. Bên cạnh đó, thuật toán cần phải có tính tăng cường (incremental
+function), nghĩa là chỉ phân loại các văn bản mới mà không phân loại lại toàn bộ văn
+bản khi thêm một số văn bản mới vào tập dữ liệu. Khi đó, thuật toán có khả năng giảm
+độ nhiễu (noise) khi phân loại văn bản.
+
+When to use LIBLINEAR but not LIBSVM
+
+There are some large data for which with/without nonlinear mappings gives similar performances. Without using kernels, one can quickly train a much larger set via a linear classifier. Document classification is one such application. 
+In the following example (20,242 instances and 47,236 features; available on LIBSVM data sets), the cross-validation time is significantly reduced by using LIBLINEAR:
+Cross Validation Accuracy = 96.8136%, 345.569s
+
+Cross Validation Accuracy = 97.0161%, 2.944s
 
 Tạo sao Liblinear nhanh hơn Libsvm
 Trong thực tế sự phức tạp của thuật toán SVM (kernel và linear SVM) được thực hiện trong Libsvm là O(n^2) hoặc O(n^3) trong khi đó liblinear là O(n) vì không hỗ trợ kernel. N là số lượng mẫu trong tập dữ liệu huấn luyện.
